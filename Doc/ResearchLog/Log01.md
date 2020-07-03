@@ -4,4 +4,5 @@
 ## The visulization of the wind
 The Visual Effect Graph is used to display the wind position in temporary position.
 
-![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
+![alt text](https://github.com/AtwoodDeng/InteractiveWind/tree/master/Doc/ResearchLog/Image/Log01_1.JPG "Wind Visalization")
+![alt text](https://github.com/AtwoodDeng/InteractiveWind/tree/master/Doc/ResearchLog/Image/Log01_2.JPG "Wind Visual Effect")
