@@ -16,7 +16,20 @@ MonoBehaviour:
   settings:
     renderEvent: 300
     finalizeShader: {fileID: 7200000, guid: 586ceff41030b5041bc6f3704e789d5a, type: 3}
-    finalizeKernel: CSMain
+    m_applyImpulse: {fileID: 7200000, guid: 7740bca8e2a7c8042a8ced24196ba7b9, type: 3}
+    m_applyAdvect: {fileID: 7200000, guid: 3b8f7cc202ed7704f8ebdc3dcf361e14, type: 3}
+    m_computeVorticity: {fileID: 7200000, guid: f2c8f44386bfa2b459b2cf86f02f4409,
+      type: 3}
+    m_computeDivergence: {fileID: 7200000, guid: 205ea499950236b4ca8e452813fce68e,
+      type: 3}
+    m_computeJacobi: {fileID: 7200000, guid: 42be41baedccfdc499017dec8803ac78, type: 3}
+    m_computeProjection: {fileID: 7200000, guid: 82e7a6286be085e4c8e422d952897991,
+      type: 3}
+    m_computeConfinement: {fileID: 7200000, guid: 6c1387b76164ae4458aedf471bc8d54d,
+      type: 3}
+    m_computeObstacles: {fileID: 7200000, guid: 38a7c606b9d10fd409b67d44f1a71a77,
+      type: 3}
+    m_applyBuoyancy: {fileID: 7200000, guid: fbf992dcdec01cc40b5ec9993968fe85, type: 3}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -5,30 +5,29 @@ using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.VFX;
 
-public class FinalizeWindPass : ScriptableRenderPass
+public class FinalizeWindPass : ScriptableRenderPass 
 {
-    string m_ProfilerTag = "Wind_FinalizeWind";
-    public ComputeShader finalizeShader;
-    public int kernel;
-    public static int WindDataTexID = Shader.PropertyToID("WindDataTex");
+    string m_ProfilerTag = "Wind_Finalize";
+    //public ComputeShader finalizeShader;
+    //public int kernel;
+    public static int WindDataTexID = Shader.PropertyToID("WindDataTex"); 
 
-    public List<InteractiveWindManager.WindLODDataRT> windDataLODs;
-
-
+    public List<InteractiveWindManager.WindDataRuntime> windDatas;
+    public WindFeature.WindSettings settings;
 
     public FinalizeWindPass(WindFeature.WindSettings windSettings)
     {
         this.renderPassEvent = windSettings.renderEvent;
-        this.finalizeShader = windSettings.finalizeShader;
+        this.settings = windSettings;
 
-        if ( finalizeShader != null )
-            kernel = this.finalizeShader.FindKernel(windSettings.finalizeKernel);
+        //if ( finalizeShader != null )
+        //    kernel = this.finalizeShader.FindKernel(windSettings.finalizeKernel);
     }
 
-    public void Setup(List<InteractiveWindManager.WindLODDataRT> windDataLODs)
+    public void Setup(List<InteractiveWindManager.WindDataRuntime> windDataLODs)
     {
-        this.windDataLODs = windDataLODs;
-    }
+        this.windDatas = windDataLODs; 
+    } 
 
 
     public override void Configure(CommandBuffer cmd, RenderTextureDescriptor cameraTextureDescriptor)
@@ -45,15 +44,14 @@ public class FinalizeWindPass : ScriptableRenderPass
         {
             CommandBuffer cmd = CommandBufferPool.Get(m_ProfilerTag);
 
-            for (int i = 0; i < windDataLODs.Count; ++i)
+            for (int i = 0; i < windDatas.Count; ++i)
             {
-                var data = windDataLODs[i];
-                InteractiveWindManager.AssignBasicMaterial(finalizeShader, data);
-                cmd.SetComputeTextureParam(finalizeShader, kernel, WindDataTexID, data.WindDataTex[0]);
-                cmd.DispatchCompute(finalizeShader, kernel,
-                    Mathf.CeilToInt(1.0f * data.width  / WindFeature.THREAD_NUM),
-                    Mathf.CeilToInt(1.0f * data.height / WindFeature.THREAD_NUM),
-                    Mathf.CeilToInt(1.0f * data.depth  / WindFeature.THREAD_NUM));
+                var data = windDatas[i];
+                InteractiveWindManager.FinalizeWindData(
+                    cmd,
+                    settings.finalizeShader, 
+                    data
+                );
             }
 
             context.ExecuteCommandBuffer(cmd);

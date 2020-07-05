@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: WindLOD0
   m_EditorClassIdentifier: Assembly-CSharp::WindLODData
   WindAreaSize: {x: 10, y: 10, z: 10}
-  WindResolution: 1
+  WindResolution: 0.1
